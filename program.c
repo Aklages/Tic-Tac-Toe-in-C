@@ -49,7 +49,7 @@ int play(char table[3][3], int move, int plays)
         return ++plays;
     }
     else{
-        system("clear");
+        system("cls");
         printf("Jogada inválida\n");
         printf("Presione 0 e de enter para continuar: ");
         scanf("%d", &z);
@@ -57,17 +57,43 @@ int play(char table[3][3], int move, int plays)
     }
 }
 
+int win(char tab[3][3], int plays)
+{
+    char s;
+
+    if(plays % 2 == 0){
+        s = 'X';
+    }
+    else{
+        s = 'O';
+    }
+    if ((tab[0][0] == s && tab[0][1] == s && tab[0][2] == s) || (tab[1][0] == s && tab[1][1] == s && tab[1][2] == s) || (tab[2][0] == s && tab[2][1] == s && tab[2][2] == s)){
+        return 1;
+    }
+    else if ((tab[0][0] == s && tab[1][0] == s && tab[2][0] == s) || (tab[0][1] == s && tab[1][1] == s && tab[2][1] == s) || (tab[0][2] == s && tab[1][2] == s && tab[2][2] == s)){
+        return 1;
+    }
+    else if ((tab[0][0] == s && tab[1][1] == s && tab[2][2] == s) || (tab[0][2] == s && tab[1][1] == s && tab[2][0] == s)){
+        return 1;
+    }
+    return 0;
+}
+
 int check(char tab[3][3], int plays)
 {
     int op;
-    if(1 == 0){
-        if(1 == 0){
+    if(win(tab, plays)){
+        if(plays % 2 == 0){
+            system("cls");
+            table(tab);
             printf("Jogador 1 ganhou! Parabens!\n");
             printf("Digite 0 para encerrar: ");
             scanf("%d", &op);
             return 0;
         }
-        else if (1 == 0){
+        else{
+            system("cls");
+            table(tab);
             printf("Jogador 2 ganhou! Parabens!\n");
             printf("Digite 0 para encerrar: ");
             scanf("%d", &op);
@@ -75,7 +101,7 @@ int check(char tab[3][3], int plays)
         }
     }
     else if(plays == 9){
-        system("clear");
+        system("cls");
         printf("Resultado final:\n");
         table(tab);
         printf("Deu velha :(\n\n");
@@ -91,7 +117,7 @@ int main()
     int game = 1, move = 0, plays = 0, mode;
     char tab[3][3];
 
-    system("clear");
+    system("cls");
     init(tab);
     printf("Bem vindo ao jogo do velha!\n");
     printf("Escolha o modo de jogo:\n");
@@ -99,7 +125,7 @@ int main()
     printf("2- Enfrentar a IA maligna do dede\n");
     printf("Opcao: ");
     scanf("%d", &mode);
-    system("clear");
+    system("cls");
 
     while (game)
     {
@@ -111,7 +137,7 @@ int main()
             scanf("%d", &move);
             plays = play(tab, move, plays);
             game = check(tab, plays);
-            system("clear");
+            system("cls");
         }
         else{
             printf("ainda em produção...\n");
